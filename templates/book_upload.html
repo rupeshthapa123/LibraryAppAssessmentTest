@@ -1,0 +1,38 @@
+{% extends 'index.html' %}
+{% block content %}
+
+<form method="POST" class="bookform" enctype="multipart/form-data">
+   {% csrf_token %}
+   {{ upload_form.non_field_errors }}
+   <div class="form-header">
+      <h1>Book</h1>
+   </div>
+   <div class="form-body">
+      <div class="horizontal-group">
+         <div class="form-group">
+            {{ upload_form.name.errors }}
+            <label for="{{ upload_form.name.id_for_label }}" class="label-title"> Name:</label>
+            {{ upload_form.name }}
+         </div>
+         <div class="form-group">
+            {{ upload_form.picture.errors }}
+            <label for="{{ upload_form.picture.id_for_label }}" class="label-title">Picture:</label>
+            {{ upload_form.picture }}
+         </div>
+         <div class="form-group">
+            {{ upload_form.author.errors }}
+            <label for="{{ upload_form.author.id_for_label }}" class="label-title">Author:</label>
+            {{ upload_form.author }}
+         </div>
+         <div class="form-group">
+            {{ upload_form.describe.errors }}
+            <label for="{{ upload_form.describe.id_for_label }}" class="label-title">Description</label>
+            {{ upload_form.describe }}
+         </div>
+         <div class="form-footer">
+               <input type="submit" name="btnSubmit" class="btn" value="Submit" />
+         </div>
+      </div>
+   </div>
+</form>
+{% endblock content %}

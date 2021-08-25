@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+{% load static %}
+<!-- {% static 'images' as BaseUrl %} -->
+<html>
+<head>
+    <title>Library</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}" >
+</head>
+<body>
+
+  {% for message in messages %}
+    <div class="success-msg" id="message">
+        <i class="fa fa-check"></i>
+        <button type="button" class="btnclose" id="close-btn" onclick="showOrHide()">
+            <span aria-hidden="true">×</span>
+        </button>
+        {{ message }}
+      </div>
+    {% endfor %}
+
+<div class="nav">
+<ul>
+  <li><a href="/">Book Shelf</a></li>
+  <li style="float:right"><a class="active" href="/upload">Add Book</a></li>
+</ul>
+</div>
+{% block content%}
+{% endblock content%} 
+<div class="row">
+{% for book in shelf %}
+<div class="column">
+<div class="card">
+<img class="card-img-top" style="width: 50%;" src="{{ book.picture.url }}">
+  <h2 class="card-title">{{ book.name }}</h2>
+  <h4 class="card-title">{{book.author}}</h4>
+  <p class="card-text">{{ book.describe }}</p>
+
+  <a href="update/{{book.id}}" class="btn-warning" id = '{{book.id}}'>Edit</a>
+  <a href="delete/{{book.id}}" class="btn-danger" id = '{{book.id}}'>Delete</a>
+</div>
+</div>
+{% endfor %}
+</div>
+
+<script>
+  function showOrHide() {
+         var v = document.getElementById("message");
+         if (v.style.display === "none") {
+             v.style.display = "block";
+         } else {
+             v.style.display = "none";
+         }
+     } 
+</script>
+ 
+</body>
+</html>
